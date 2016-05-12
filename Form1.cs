@@ -21,7 +21,7 @@ namespace UploadClientForStudent
             InitializeComponent();
         }
 
-        public static string UPLOAD_URL = ""; //JettyES Server Upload URL
+        public static string UPLOAD_URL = "http://127.0.0.1/MyUploadFile"; //JettyES Server Upload URL
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -82,8 +82,8 @@ namespace UploadClientForStudent
                 string _SchoolName = SchoolComboBox.SelectedItem.ToString();
                 string _ClassName = ClassName.Text;
 
-                
-                WebClient myWebClient = new WebClient();
+
+                /*WebClient myWebClient = new WebClient();
                 myWebClient.Proxy = System.Net.WebRequest.DefaultWebProxy;
                 myWebClient.Proxy.Credentials = System.Net.CredentialCache.DefaultCredentials;
                 myWebClient.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
@@ -94,7 +94,15 @@ namespace UploadClientForStudent
                 parameters.Add("ClassName", _ClassName);
                 myWebClient.QueryString = parameters;
                 var responseBytes = myWebClient.UploadFile(UPLOAD_URL, filePath);
-                string response = Encoding.ASCII.GetString(responseBytes);
+                string response = Encoding.ASCII.GetString(responseBytes);*/
+                WebClient myWebClient = new WebClient();
+                NameValueCollection parameters = new NameValueCollection();
+                parameters.Add("FullName", _FullName);
+                parameters.Add("PhoneNumber", _PhoneNumber);
+                parameters.Add("SchoolName", _SchoolName);
+                parameters.Add("ClassName", _ClassName);
+                myWebClient.QueryString = parameters;
+                byte[] responseArray = myWebClient.UploadFile(UPLOAD_URL, filePath);
 
 
                 MessageBox.Show("進行上傳");
