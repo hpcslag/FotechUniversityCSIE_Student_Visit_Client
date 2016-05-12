@@ -44,6 +44,7 @@
             this.UploadFileButton = new System.Windows.Forms.Button();
             this.openFileDialog_ZIP = new System.Windows.Forms.OpenFileDialog();
             this.label7 = new System.Windows.Forms.Label();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.SuspendLayout();
             // 
             // label1
@@ -193,11 +194,19 @@
             this.label7.TabIndex = 15;
             this.label7.Text = "(含區碼)";
             // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(9, 290);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(262, 23);
+            this.progressBar1.TabIndex = 16;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(281, 295);
+            this.ClientSize = new System.Drawing.Size(281, 328);
+            this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.UploadFileButton);
             this.Controls.Add(this.label_file_path);
@@ -217,6 +226,7 @@
             this.MinimizeBox = false;
             this.Name = "Form1";
             this.Text = "FotechCSIE - Student Visit Client";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.GOURL);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -240,6 +250,7 @@
         private System.Windows.Forms.Button UploadFileButton;
         private System.Windows.Forms.OpenFileDialog openFileDialog_ZIP;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.ProgressBar progressBar1;
     }
 }
 
