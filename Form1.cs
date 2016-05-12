@@ -9,6 +9,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows; // Application
+using System.Net;
+using System.Collections.Specialized;
 
 namespace UploadClientForStudent
 {
@@ -18,6 +20,8 @@ namespace UploadClientForStudent
         {
             InitializeComponent();
         }
+
+        public static string UPLOAD_URL = ""; //JettyES Server Upload URL
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -73,6 +77,26 @@ namespace UploadClientForStudent
         {
             if (checkFormIsDone())
             {
+                string _FullName = FullName.Text;
+                string _PhoneNumber = PhoneNumber.Text;
+                string _SchoolName = SchoolComboBox.SelectedItem.ToString();
+                string _ClassName = ClassName.Text;
+
+                
+                WebClient myWebClient = new WebClient();
+                myWebClient.Proxy = System.Net.WebRequest.DefaultWebProxy;
+                myWebClient.Proxy.Credentials = System.Net.CredentialCache.DefaultCredentials;
+                myWebClient.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
+                NameValueCollection parameters = new NameValueCollection();
+                parameters.Add("FullName", _FullName);
+                parameters.Add("PhoneNumber", _PhoneNumber);
+                parameters.Add("SchoolName", _SchoolName);
+                parameters.Add("ClassName", _ClassName);
+                myWebClient.QueryString = parameters;
+                var responseBytes = myWebClient.UploadFile(UPLOAD_URL, filePath);
+                string response = Encoding.ASCII.GetString(responseBytes);
+
+
                 MessageBox.Show("進行上傳");
             }
             else
